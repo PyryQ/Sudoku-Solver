@@ -44,20 +44,12 @@
 .title-container {
   margin-bottom: 20px;
 }
-/* .grid-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 700px; 
-  margin: 0 auto; 
-} */
 
 .grid-container {
   display: flex;
   flex-wrap: wrap;
-  width: 300px;
-  height: 300px;
+  width: 287px;
+  height: 287px;
   border: 2px solid black;
 }
 
@@ -65,14 +57,6 @@
 .sudoku-grid {
   display: flex;
   flex-direction: column;
-}
-
-.grid-container {
-  display: flex;
-  flex-wrap: wrap;
-  width: 300px;
-  height: 300px;
-  border: 2px solid black;
 }
 
 .row {
@@ -99,6 +83,12 @@
 
 .row:nth-child(3n) .square:nth-child(3n) {
   border-bottom-right: 2px solid black;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  width: 100px;
 }
 
 

@@ -19,35 +19,46 @@ const App = () => {
   ]);
 
   const resetGrid = () => {
-    setGrid([    
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0],
-      [0,0,0,0,0,0,0,0,0]
-    ]);
-    setIsSolvable(true);
+    setGrid(Array.from({ length: 9 }, () => Array(9).fill(0)));
+    setSolveState("mightBeSolvable");
   };
 
-  const [isSolvable, setIsSolvable] = useState(true);
+  const [mightBeSolvable, setMightBeSolveble] = useState(true);
+
+  //1 = might be solvable, 2 = not solvable, 3 = solved
+  const [solveState, setSolveState] = useState("mightBeSolvable");
 
   const handleChange = (event, rowIndex, colIndex) => {
     const updatedGrid = [...grid];
-    updatedGrid[rowIndex][colIndex] = event.target.value;
-    setGrid(updatedGrid);
+    const value = event.target.value;
+    if (Solver.isValidAddition(rowIndex, colIndex, value, updatedGrid))
+    {
+      updatedGrid[rowIndex][colIndex] = value;
+      setGrid(updatedGrid);
+
+    }
   };
 
   const solveGrid = () => {
     if (Solver.solveSudoku(grid, setGrid)) {
       setGrid(grid);
+      setSolveState("solved");
     } else {
-      setIsSolvable(false);
+      setSolveState("notSolvable");
       console.log("No solution exists");
     }
+  };
+
+  const MightBeSolvableParagraph = () => {
+    return <p>Might be solvable.</p>;
+  };
+
+  const NotSolvableParagraph = () => {
+    return <p>Might be solvable.</p>;
+  };
+
+  const SolvedParagraph = () => {
+    return <p>Solved!</p>;
   };
 
   return (
@@ -65,35 +76,25 @@ const App = () => {
               type="text"
               value={col || ''}
               maxLength="1"
-              onChange={event => handleChange(event, rowIndex, colIndex)}
+              onChange={event => {
+                if  (/^\d$/.test(event.target.value)){
+                  handleChange(event, rowIndex, colIndex);
+                }
+              }}
               className="square"
             />
           ))}
         </div>
       ))}
     </div>
-{/*         {Array.from({ length: 9 }, (_, rowIndex) => (
-          <div key={rowIndex} className="row">
-            {grid.slice(rowIndex * 9, rowIndex * 9 + 9).map((square, squareIndex) => (
-              <input
-                type="text"
-                value={square || ""}
-                onChange={(event) => handleChange(event, rowIndex * 9 + squareIndex)}
-                className="square"
-                key={squareIndex}
-              />
-            ))}
-          </div>
-        ))} */}
       <br />
       <button onClick={solveGrid}>Solve</button>
       <br />
       <button onClick={resetGrid}>Reset Grid</button>
-      {isSolvable ? (
-        <p>This sudoku might be solvable.</p>
-    ) : (
-      <p>This sudoku is not solvable.</p>
-    )}
+      <br />
+        {(solveState === "mightBeSolvable") && <MightBeSolvableParagraph/>}
+        {(solveState === "notSolvable") && <NotSolvableParagraph/>}
+        {(solveState === "solved") && <SolvedParagraph/>}
     </div>
   );
 };
