@@ -18,6 +18,20 @@ const App = () => {
     [0,0,0,0,0,0,0,0,0]
   ]);
 
+  const resetGrid = () => {
+    setGrid([    
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0],
+      [0,0,0,0,0,0,0,0,0]
+    ]);
+  };
+
   const [isSolvable, setIsSolvable] = useState(true);
 
   const handleChange = (event, rowIndex, colIndex) => {
@@ -79,6 +93,8 @@ const App = () => {
         ))} */}
       <br />
       <button onClick={solveGrid}>Solve</button>
+      <br />
+      <button onClick={resetGrid}>Reset Grid</button>
       {isSolvable ? (
         <p>This sudoku might be solvable.</p>
     ) : (
