@@ -30,6 +30,7 @@ const App = () => {
       [0,0,0,0,0,0,0,0,0],
       [0,0,0,0,0,0,0,0,0]
     ]);
+    setIsSolvable(true);
   };
 
   const [isSolvable, setIsSolvable] = useState(true);
@@ -39,13 +40,6 @@ const App = () => {
     updatedGrid[rowIndex][colIndex] = event.target.value;
     setGrid(updatedGrid);
   };
-
-  const handleSquareClick = (row, col) => {
-    const newGrid = [...grid];
-    newGrid[row][col] = 1;
-    setGrid(newGrid);
-  };
-
 
   const solveGrid = () => {
     if (Solver.solveSudoku(grid, setGrid)) {
