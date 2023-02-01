@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './SudokuGrid.css';
 import Solver from './SudokuSolver';
 import './App.css';
-import Grid from './Grid';
 
 const App = () => {
   
@@ -23,9 +22,6 @@ const App = () => {
     setSolveState("mightBeSolvable");
   };
 
-  const [mightBeSolvable, setMightBeSolveble] = useState(true);
-
-  //1 = might be solvable, 2 = not solvable, 3 = solved
   const [solveState, setSolveState] = useState("mightBeSolvable");
 
   const handleChange = (event, rowIndex, colIndex) => {
@@ -35,7 +31,6 @@ const App = () => {
     {
       updatedGrid[rowIndex][colIndex] = value;
       setGrid(updatedGrid);
-
     }
   };
 
@@ -92,9 +87,13 @@ const App = () => {
       <br />
       <button onClick={resetGrid}>Reset Grid</button>
       <br />
-        {(solveState === "mightBeSolvable") && <MightBeSolvableParagraph/>}
-        {(solveState === "notSolvable") && <NotSolvableParagraph/>}
-        {(solveState === "solved") && <SolvedParagraph/>}
+      {solveState === "mightBeSolvable"
+        ? <MightBeSolvableParagraph />
+        : solveState === "notSolvable"
+        ? <NotSolvableParagraph />
+        : solveState === "solved"
+        ? <SolvedParagraph />
+        : null}
     </div>
   );
 };
