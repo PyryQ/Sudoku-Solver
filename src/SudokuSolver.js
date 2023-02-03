@@ -2,7 +2,7 @@ const solveSudoku = (grid, setGrid) => {
   const isValid = (board, row, col, k) => {
     for (let i = 0; i < 9; i++) {
       const m = 3 * Math.floor(row / 3) + Math.floor(i / 3);
-      const n = 3 * Math.floor(col / 3) + i % 3;
+      const n = 3 * Math.floor(col / 3) + (i % 3);
       if (board[row][i] == k || board[i][col] == k || board[m][n] == k) {
         return false;
       }
@@ -35,9 +35,6 @@ const solveSudoku = (grid, setGrid) => {
   }
 };
 
-
-
-
 const isValidAddition = (x, y, value, grid) => {
   for (let i = 0; i < 9; i++) {
     // Check the row
@@ -66,5 +63,6 @@ const isValidAddition = (x, y, value, grid) => {
 };
 
 export default {
-  solveSudoku, isValidAddition
+  solveSudoku,
+  isValidAddition,
 };
