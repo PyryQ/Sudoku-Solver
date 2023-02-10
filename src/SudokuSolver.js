@@ -47,7 +47,7 @@ const isValidAddition = (x, y, value, grid) => {
     }
   }
 
-  // Check the 3x3 subgrid
+  // Check the 3x3 sub grid
   const x0 = Math.floor(x / 3) * 3;
   const y0 = Math.floor(y / 3) * 3;
   for (let i = 0; i < 3; i++) {
