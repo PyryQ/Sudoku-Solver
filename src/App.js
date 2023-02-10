@@ -18,10 +18,7 @@ const App = () => {
 
   const resetGrid = () => {
     setGrid(Array.from({ length: 9 }, () => Array(9).fill(0)));
-    setSolveState("mightBeSolvable");
   };
-
-  const [solveState, setSolveState] = useState("mightBeSolvable");
 
   const handleChange = (event, rowIndex, colIndex) => {
     const updatedGrid = [...grid];
@@ -35,23 +32,9 @@ const App = () => {
   const solveGrid = () => {
     if (Solver.solveSudoku(grid, setGrid)) {
       setGrid(grid);
-      setSolveState("solved");
     } else {
-      setSolveState("notSolvable");
       console.log("No solution exists");
     }
-  };
-
-  const MightBeSolvableParagraph = () => {
-    return <p>Might be solvable.</p>;
-  };
-
-  const NotSolvableParagraph = () => {
-    return <p>Might be solvable.</p>;
-  };
-
-  const SolvedParagraph = () => {
-    return <p>Solved!</p>;
   };
 
   return (
@@ -85,13 +68,6 @@ const App = () => {
       <br />
       <button onClick={resetGrid}>Reset Grid</button>
       <br />
-      {solveState === "mightBeSolvable" ? (
-        <MightBeSolvableParagraph />
-      ) : solveState === "notSolvable" ? (
-        <NotSolvableParagraph />
-      ) : solveState === "solved" ? (
-        <SolvedParagraph />
-      ) : null}
     </div>
   );
 };
